@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ímpar ou Par com Flask + OpenCV</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <span class="badge">Python • Flask • OpenCV</span>
+        <h1>Jogo de Ímpar ou Par</h1>
+        <p>Escolha ímpar ou par, mostre os dedos para a câmera e jogue contra o computador. O backend recebe a imagem e usa OpenCV para tentar identificar sua jogada.</p>
+      </div>
+    </section>
+
+    <section class="game-grid">
+      <div class="card camera-card">
+        <div class="card-header">
+          <h2>1. Câmera</h2>
+          <p>Deixe a mão centralizada, com fundo limpo e boa iluminação.</p>
+        </div>
+
+        <div class="video-wrap">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="canvas" class="hidden"></canvas>
+        </div>
+
+        <div class="actions">
+          <button id="startCameraBtn" class="btn secondary">Ativar câmera</button>
+          <button id="captureBtn" class="btn">Capturar e jogar</button>
+        </div>
+
+        <p id="cameraStatus" class="status-text">Câmera ainda não ativada.</p>
+      </div>
+
+      <div class="card controls-card">
+        <div class="card-header">
+          <h2>2. Sua jogada</h2>
+          <p>O número manual é usado se a leitura da câmera não ficar confiável.</p>
+        </div>
+
+        <label class="label">Escolha</label>
+        <div class="choice-row" role="group" aria-label="Escolha ímpar ou par">
+          <label class="radio-card"><input type="radio" name="choice" value="par" checked /><span>Par</span></label>
+          <label class="radio-card"><input type="radio" name="choice" value="impar" /><span>Ímpar</span></label>
+        </div>
+
+        <label for="manualNumber" class="label">Número manual de apoio</label>
+        <select id="manualNumber">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <button id="manualPlayBtn" class="btn wide">Jogar sem câmera</button>
+
+        <div id="result" class="result-box empty">
+          <h3>Resultado</h3>
+          <p>Faça sua primeira jogada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card debug-card">
+      <div class="card-header">
+        <h2>Imagem processada pelo OpenCV</h2>
+        <p>Quando você jogar com câmera, o backend retorna uma imagem com marcações do processamento.</p>
+      </div>
+      <img id="debugImage" alt="Imagem processada pelo OpenCV" class="debug-image hidden" />
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

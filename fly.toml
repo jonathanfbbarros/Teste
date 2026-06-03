@@ -1,4 +1,4 @@
-app = "meu-app-flask"
+app = "projetopex"
 primary_region = "gru"
 
 [http_service]
